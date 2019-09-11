@@ -16,4 +16,22 @@ $(document).ready(function() {
 
       var db = firebase.database();
 
-}
+      $("#newTrain").on("click", function(event) {
+        event.preventDefault();
+
+      //Add Variables to be able to grab the data that is entered
+      var Name = $(#trainName-input).val()
+      var TrainOne = $("#trainOne-input").val()
+      var Destination = $("#destination-input").val()
+      var Freq = $("#freq-input").val()
+
+      var TrainData= {
+          Name: Name,
+          Destination: Destination,
+          Start: TrainOne,
+          Frequency: Freq 
+      };
+
+      //Push TrainData to the database
+      database.ref().push(TrainData);
+}:
