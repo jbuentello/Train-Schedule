@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/app.js">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
+    <link rel="text/javascript" href="assets/app.js">
     <title>Train Scheduler</title>
 </head>
 <body>
@@ -64,6 +67,53 @@
                 </div>
 
 
-    
+                <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+
+               <!-- TODO: Add SDKs for Firebase products that you want to use -->
+                <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
+                
+                <script>
+                  // Your web app's Firebase configuration
+                  var firebaseConfig = {
+                    apiKey: "AIzaSyBOlGrJturWavBdtVEWa33ABqiAmsi7MtQ",
+                    authDomain: "train-scheduler-72bab.firebaseapp.com",
+                    databaseURL: "https://train-scheduler-72bab.firebaseio.com",
+                    projectId: "train-scheduler-72bab",
+                    storageBucket: "train-scheduler-72bab.appspot.com",
+                    messagingSenderId: "199082199417",
+                    appId: "1:199082199417:web:337a2e80b62f4e411807a8"
+                  };
+                  // Initialize Firebase
+                  firebase.initializeApp(firebaseConfig);
+
+                  var db = firebase.database();
+                  // console.log(db);
+
+                  $("#newTrain").on("click", function(event) {
+        event.preventDefault();
+
+      //Add Variables to be able to grab the data that is entered
+      var Name = $("#trainName-input").val();
+      var TrainOne = $("#TrainOne-input").val();
+      var Destination = $("#destination-input").val();
+      var Freq = $("#freq-input").val();
+                    console.log(TrainOne);
+      var TrainData= {
+          Name: Name,
+          Destination: Destination,
+          Start: TrainOne,
+          Frequency: Freq 
+      };
+
+      //Push TrainData to the database
+      db.ref().push(TrainData);
+
+      //Figure out how to erase items from the databoxes 
+      $("#trainName-input").val("");
+	  $("#destination-input").val("");
+	  $("#TrainOne-input").val("");
+	  $("#freq-input").val("");
+});
+  </script>   
 </body>
 </html>
